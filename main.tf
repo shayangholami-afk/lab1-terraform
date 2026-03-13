@@ -12,10 +12,10 @@ provider "google" {
   region  = var.region
 }
 
-resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-vm"
+resource "google_compute_instance" "vm" {
+  name         = "${var.student_id}-lab1-vm"
   machine_type = "e2-micro"
-  zone         = "europe-north1-a"
+  zone         = "${var.region}-a"
 
   boot_disk {
     initialize_params {
@@ -27,22 +27,18 @@ resource "google_compute_instance" "vm_instance" {
 
   network_interface {
     network = "default"
+    access_config {}
+  }
+
+  metadata_startup_script = file("startup.sh")
+
+  labels = {
+    student = var.student_id
+    course  = "devsecops-2026"
+    lab     = "1"
   }
 
   tags = ["lab1", "ssh"]
-
-  metadata_startup_script = <<-EOF
-    #!/bin/bash
-    apt-get update
-    apt-get install -y ufw fail2ban
-    ufw --force enable
-    ufw allow 22
-  EOF
-
-  labels = {
-    lab = "terraform-gcp"
-    student = var.student_id
-  }
 }
 
 resource "google_compute_resource_policy" "daily_backup" {
@@ -65,6 +61,6 @@ resource "google_compute_resource_policy" "daily_backup" {
 
 resource "google_compute_disk_resource_policy_attachment" "backup_attachment" {
   name  = google_compute_resource_policy.daily_backup.name
-  disk  = "terraform-vm"
-  zone  = "europe-north1-a"
+  disk  = google_compute_instance.vm.name
+  zone  = "${var.region}-a"
 }
