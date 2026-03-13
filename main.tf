@@ -60,7 +60,7 @@ resource "google_compute_resource_policy" "daily_backup" {
 }
 
 resource "google_compute_disk_resource_policy_attachment" "backup_attachment" {
-  name  = google_compute_resource_policy.daily_backup.name
-  disk  = google_compute_instance.vm.name
-  zone  = "${var.region}-a"
+  name = google_compute_resource_policy.daily_backup.name
+  disk = google_compute_instance.vm.name
+  zone = "${var.region}-a"
 }
