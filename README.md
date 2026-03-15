@@ -1,26 +1,26 @@
-# Lab 1 – Terraform + GCP VM (DevSecOps 2026)
+Lab 1 - Terraform DevSecOps
 
-## Vad projektet gör
-Det här projektet skapar en Ubuntu 22.04-VM i Google Cloud Platform i regionen europe-north1 med Terraform.
+**Projektbeskrivning**
+Detta projekt skapar en Ubuntu VM i Google Cloud med Terraform. Den inkluderar en backup-policy och en basic säkerhetshärdning via startup-script.
 
-## Hur man kör
-
-**Förutsättningar:**  
-- Installerad Terraform CLI  
-- Google Cloud-projekt `chas-devsecops-2026`  
-- Service account‑nyckel, t.ex. `~/gcp-keys/terraform-lab1.json`, satt som `GOOGLE_APPLICATION_CREDENTIALS`  
-- Git installerat
-
-## Säkerhetsbeslut
-- **ufw**: Blockera all trafik utom SSH  
-- **fail2ban**: Skydd mot brute force attacker
-- **Dagliga snapshots**: Backup kl 03:00 (7 dagar retention)
-
- # Initiera Terraform (hämtar provider och backend)
+**Hur man kör**
+\`\`\`bash
 terraform init
-
-# Granska vilka resurser som kommer skapas
-terraform plan
-
-# Skapa VM, snapshot-policy och kopplingen mellan dem
+terraform plan  
 terraform apply
+\`\`\`
+
+**Min Labb**
+
+### Google Compute Engine
+Här är en screenshot från Google Compute Engine:  
+![GCE Screenshot](screenshots/vm-details.png)
+
+### Terraform Pipeline
+Så här såg Terraform pipeline ut:  
+![Pipeline Screenshot](screenshots/pipeline.png)
+
+**Säkerhetsbeslut**
+- ufw – blockerar alla inkommande förutom SSH
+- fail2ban – skyddar mot brute-force attackers  
+- unattended-upgrades – håller systemet uppdaterat automatiskt
