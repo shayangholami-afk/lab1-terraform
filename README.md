@@ -1,5 +1,9 @@
 # Lab 1 – Terraform GCP VM
 
 ## Screenshots
-![GCP VM](screenshots/gcp-vm.png)
-![GCP VM](screenshots/gcp-vm.png)
+
+**GitHub Actions Pipeline & GCP VM:**
+
+![GCP VM Running](screenshots/gcp-vm.png)
+
+![GCP VM Details](screenshots/gcp-vm-running.png)
