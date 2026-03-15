@@ -14,3 +14,9 @@ Det här projektet skapar en Ubuntu 22.04-VM i Google Cloud Platform i regionen 
 terraform init
 terraform plan  
 terraform apply
+
+## Pipeline
+![Pipeline](screenshots/gcp-vm-running.png)
+
+## GCP VM
+![GCP VM](screenshots/gcp-vm-running.png)
