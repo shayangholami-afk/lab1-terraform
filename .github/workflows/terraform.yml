@@ -1,4 +1,4 @@
-name: Terraform CI/CD
+name: Terraform CI/CD with Security
 
 on:
   push:
@@ -26,13 +26,13 @@ jobs:
     
     - name: Terraform Plan
       run: terraform plan -out=tfplan
-      
+    
+    # MOMENT 2: CRITICAL SECURITY SCAN (tfsec)
     - name: Security Scan - BLOCK CRITICAL
-      uses: openpolicyagent/conftest@v6.12.1
+      uses: aquasecurity/tfsec-action@v1
       with:
-        files: tfplan
-        policy: .github/policies/security.rego
-        
-    - name: Terraform Apply
+        working_directory: '.'
+    
+    - name: Terraform Apply (main only)
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve tfplan
