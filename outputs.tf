@@ -1,11 +1,14 @@
 output "vm_name" {
-  value = google_compute_instance.vm.name
+  description = "Namn på den skapade VM"
+  value       = google_compute_instance.vm.name
 }
 
-output "vm_external_ip" {
-  value = google_compute_instance.vm.network_interface[0].access_config[0].nat_ip
+output "vm_internal_ip" {
+  description = "Intern IP-adress för VM (ingen extern IP pga quota)"
+  value       = google_compute_instance.vm.network_interface[0].network_ip
 }
 
-output "vm_zone" {
-  value = google_compute_instance.vm.zone
+output "snapshot_policy" {
+  description = "Daglig backup-policy"
+  value       = google_compute_resource_policy.daily_backup.name
 }
