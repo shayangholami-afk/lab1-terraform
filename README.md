@@ -10,4 +10,3 @@ Det här projektet skapar en Ubuntu 22.04-VM i Google Cloud Platform i regionen 
 - Google Cloud-projekt `chas-devsecops-2026`  
 - Service account‑nyckel, t.ex. `~/gcp-keys/terraform-lab1.json`, satt som `GOOGLE_APPLICATION_CREDENTIALS`  
 - Git installerat
-- 
