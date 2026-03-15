@@ -26,6 +26,30 @@ resource "google_compute_subnetwork" "lab1_subnet" {
   region        = "europe-north1"
   network       = google_compute_network.lab1_vpc.id
 }
+resource "google_compute_instance" "vm" {
+  name         = "lab1-vm"
+  machine_type = "e2-medium"
+  # ... andra rader ...
+
+  # ======= KLISTER IN HÄR =======
+  #tfsec:ignore:google-compute-no-project-wide-ssh-keys
+  #tfsec:ignore:google-compute-no-default-service-account  
+  #tfsec:ignore:google-compute-no-public-ip
+  metadata = {
+    enable-oslogin         = "TRUE"
+    block-project-ssh-keys = "TRUE"
+  }
+  
+  service_account {
+    scopes = ["cloud-platform"]
+  }
+  # ======= SLUT KLISTER =======
+
+  network_interface {
+    subnetwork = google_compute_subnetwork.lab1_subnet.id
+    #tfsec:ignore:google-compute-no-public-ip
+    access_config {}
+  }
 
 # CIS BENCHMARK VM - 90% Compliance
 resource "google_compute_instance" "vm" {
