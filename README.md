@@ -14,7 +14,7 @@ Det här projektet skapar en Ubuntu 22.04-VM i Google Cloud Platform i regionen 
 ## Säkerhetsbeslut
 - **ufw**: Blockera all trafik utom SSH  
 - **fail2ban**: Skydd mot brute force attacker
-- - **Dagliga snapshots**: Backup kl 03:00 (7 dagar retention)
+- **Dagliga snapshots**: Backup kl 03:00 (7 dagar retention)
 
  # Initiera Terraform (hämtar provider och backend)
 terraform init
